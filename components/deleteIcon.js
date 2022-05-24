@@ -1,0 +1,18 @@
+import { displayTask } from "./readTask.js";
+const deleteIcon = (id) => {
+  const i = document.createElement("i");
+  i.classList.add("fas", "fa-trash-alt", "trashIcon", "icon");
+  i.addEventListener("click", () => deleteTask(i));
+  return i;
+};
+const deleteTask = (id) => {
+  const li = document.querySelector("[data-list]")
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const index = tasks.findIndex((item) => item.id == id);
+  const newTask = tasks.splice(index, 1);
+  console.log(tasks);
+  li.innerHTML=""
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  displayTask()
+};
+export default deleteIcon;
